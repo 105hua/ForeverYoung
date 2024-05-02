@@ -1,0 +1,9 @@
+name: ForeverYoung
+version: '${version}'
+main: joshdev.foreveryoung.ForeverYoung
+api-version: '1.20'
+commands:
+  babify:
+    permission: foreveryoung.babify
+  debabify:
+    permission: foreveryoung.debabify
