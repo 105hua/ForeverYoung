@@ -5,16 +5,22 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.incendo.cloud.annotations.Command;
+import org.jetbrains.annotations.NotNull;
 
-public class BabifyCommand {
-  @Command("babify")
-  public void babify(CommandSender sender) {
-    if (sender instanceof Player player) {
+public class BabifyCommand implements CommandExecutor {
+  @Override
+  public boolean onCommand(
+      @NotNull CommandSender commandSender,
+      @NotNull Command command,
+      @NotNull String s,
+      @NotNull String[] strings) {
+    if (commandSender instanceof Player player) {
       Entity entityInView = player.getTargetEntity(10);
       if (entityInView instanceof Animals animal) {
         animal.setBaby();
@@ -34,7 +40,8 @@ public class BabifyCommand {
         player.sendMessage(noAnimalMsg);
       }
     } else {
-      sender.sendMessage("You must be a player to use this command!");
+      commandSender.sendMessage("You must be a player to use this command!");
     }
+    return true;
   }
 }

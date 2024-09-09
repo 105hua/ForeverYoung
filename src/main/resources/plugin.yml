@@ -4,6 +4,10 @@ main: joshdev.foreveryoung.ForeverYoung
 api-version: '1.20'
 commands:
   babify:
+    description: Babify an animal.
+    usage: /babify
     permission: foreveryoung.babify
   debabify:
+    description: Debabify an animal.
+    usage: /debabify
     permission: foreveryoung.debabify
