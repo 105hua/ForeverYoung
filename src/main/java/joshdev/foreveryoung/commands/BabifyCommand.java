@@ -19,10 +19,19 @@ public class BabifyCommand implements CommandExecutor {
       @NotNull CommandSender commandSender,
       @NotNull Command command,
       @NotNull String s,
-      @NotNull String[] strings) {
+      @NotNull String @NotNull [] strings) {
     if (commandSender instanceof Player player) {
       Entity entityInView = player.getTargetEntity(10);
       if (entityInView instanceof Animals animal) {
+        if (animal.getAgeLock()) {
+          TextComponent alreadyBabifiedComponent =
+              Component.text(
+                  "This animal has already been babified!",
+                  NamedTextColor.RED,
+                  TextDecoration.BOLD);
+          player.sendMessage(alreadyBabifiedComponent);
+          return true;
+        }
         animal.setBaby();
         animal.setAgeLock(true);
         TextComponent successMsg =

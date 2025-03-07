@@ -23,7 +23,15 @@ public class DebabifyCommand implements CommandExecutor {
     if (commandSender instanceof Player player) {
       Entity entityInView = player.getTargetEntity(10);
       if (entityInView instanceof Animals animal) {
+        if (!animal.getAgeLock() || animal.getAge() == 0) {
+          TextComponent alreadyAdultComponent =
+              Component.text(
+                  "Animal is already an adult!", NamedTextColor.RED, TextDecoration.BOLD);
+          player.sendMessage(alreadyAdultComponent);
+          return true;
+        }
         animal.setAgeLock(false);
+        animal.setAge(0);
         TextComponent successMsg =
             Component.text(
                 "The entity you are looking at has been turned into an adult!",
